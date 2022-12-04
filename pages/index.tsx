@@ -58,7 +58,7 @@ function App() {
 
       <div className={styles.content}>
         {data && data['newBuildCreateds'].map((item: any) => {
-          return <CommitItem item={item} onClick={() => window.location.href = "https://github.com/" + item['repository_name']} />
+          return <CommitItem key={item} item={item} onClick={() => window.location.href = "https://github.com/" + item['repository_name']} />
         })}
 
       </div>
