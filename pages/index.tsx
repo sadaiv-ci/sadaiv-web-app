@@ -50,7 +50,7 @@ function App() {
         <h1 className={styles.logo}><div className="logoItem"><TextTransition springConfig={presets.wobbly}>{TEXTS[index % TEXTS.length]}</TextTransition> Continous Integration</div></h1>
       </header>
       <div className={styles.MenuBar}>
-        <MenuItem title='About' link="" />
+        <MenuItem title='About' link="https://github.com/sadaiv-ci/sadaiv-ci#sadaiv-ci" />
         <MenuItem title='Installation' link="https://github.com/sadaiv-ci/sadaiv-ci#setting-up" />
         <MenuItem title='GitHub' link="https://github.com/sadaiv-ci" />
       </div>

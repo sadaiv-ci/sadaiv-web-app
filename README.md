@@ -1,34 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Sadaiv web app
 
-## Getting Started
+Backup your opensource contributions on to the decentralize network.
 
-First, run the development server:
+Website: https://sadaiv-web-app.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
+### About the project
+
+Sadaiv CI allows developers to integrate continuous integration (CI) that automatically backsup their project repo on to the decentralized Filecoin Storage.
+
+### Backstory 
+
+Today, most of the developer communities and organizations (including DAOs) uses GitHub to host their projects. GitHub is a centralized organization providing a limited support for web3 native values and hence the data could be lost.
+
+To resolve, this issue there are tons of other projects built on web3 stack that provides a alternative UI and architecture to host projects. But guess what people still don't use them.
+
+Because the features, and comfort GitHub (or web2 solutions) provides is uncomparable to the new immature emerging solutions. 
+
+Hence, we thought to create a continuous integration to store the projects on GitHub to decentralized network like Filecoin using Web3.Storage. This basically backsup the project on to the decentralized network every time a new commit is pushed to the branch. 
+
+Therefore, with Sadaiv CI developers can work with the comfort of web2 solutions like GitHub yet ensured about the ownership of their project and contributions.
+
+### Setting up
+
+#### STEP 1: Setup Repository Secrets
+
+- Use web3.storage to generate a new API token for storing files
+- Add this API token as your repository's GitHub secret. Use the key as WEB3_STORAGE_TOKEN
+- You are all done.
+
+#### STEP 2: Add this code to your workflow
+Adding workflow.yml file will allow you to integrate the sadaiv CI directly into your project without installing anything locally.
+```yaml
+name: Sadaiv CI
+on: [push]
+jobs:
+  production-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - run: npm install -g sadaiv
+      - run: sadaiv backup ${{ secrets.WEB3_STORAGE_TOKEN }} ${{ github.repository_owner }} ${{ github.repository }} ${{ github.ref_name }} ${{ github.event.head_commit.committer.email }} ${{ github.event.head_commit.message }}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### About smart contract
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Deployed on Polygon Mumbai Testnet: **0x4D81b6650134493F5833a499eD44c0B94415EE48**
