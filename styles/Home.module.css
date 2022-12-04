@@ -86,3 +86,14 @@
   transition: 0.4s ease-in-out;
   cursor: pointer;
 }
+
+.diagram {
+  position: fixed;
+  top: 30vh;
+  right: 1rem;
+  width: 50vw;
+  height: 50vh;
+  filter: invert(100%);
+  background-size: contain;
+  background-repeat: no-repeat;
+}

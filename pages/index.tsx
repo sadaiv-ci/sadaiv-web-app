@@ -5,6 +5,7 @@ import TextTransition, { presets } from 'react-text-transition'
 import MenuItem from '../components/MenuItem';
 import CommitItem from '../components/CommitItem';
 import Head from 'next/head';
+import bg from '../diagram.png'
 
 const QUERY = gql`
 query MyQuery {
@@ -30,7 +31,6 @@ function App() {
   const { data, loading, error } = useQuery(QUERY);
   const [index, setIndex] = React.useState(0);
 
-  console.log(data)
   React.useEffect(() => {
     const intervalId = setInterval(() =>
       setIndex(index => index + 1),
@@ -41,6 +41,7 @@ function App() {
 
   return (
     <div className={styles.App}>
+      <div style={{ backgroundImage: `url(${bg.src})` }} className={styles.diagram}></div>
       <Head>
         <title>Sadaiv CI: Backup your Repositories on Filecoin Network</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -49,9 +50,9 @@ function App() {
         <h1 className={styles.logo}><div className="logoItem"><TextTransition springConfig={presets.wobbly}>{TEXTS[index % TEXTS.length]}</TextTransition> Continous Integration</div></h1>
       </header>
       <div className={styles.MenuBar}>
-        <MenuItem title='About' onClick={() => { }} />
-        <MenuItem title='Installation' onClick={() => window.location.href = "https://github.com/sadaiv-ci/sadaiv-ci#setting-up"} />
-        <MenuItem title='GitHub' onClick={() => window.location.href = "https://github.com/sadaiv-ci"} />
+        <MenuItem title='About' link="" />
+        <MenuItem title='Installation' link="https://github.com/sadaiv-ci/sadaiv-ci#setting-up" />
+        <MenuItem title='GitHub' link="https://github.com/sadaiv-ci" />
       </div>
       <div style={{ display: 'flex', flex: 1 }} />
 
